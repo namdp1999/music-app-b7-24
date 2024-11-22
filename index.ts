@@ -10,6 +10,7 @@ import { routesClient } from "./routes/client/index.route";
 import { routesAdmin } from "./routes/admin/index.route";
 import { systemConfig } from "./config/system";
 import path from "path";
+import methodOverride from "method-override";
 
 const app: Express = express();
 const port: number = 3000;
@@ -30,6 +31,8 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // TinyMCE
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
+app.use(methodOverride("_method"));
 
 routesAdmin(app);
 routesClient(app);
